@@ -34,25 +34,36 @@ class DrawManager {
         lastPoint = node.position
     }
     
-    func stopDraw(at node: SKSpriteNode) {
+    func stopDraw(at node: SKSpriteNode){
+        restartDraw(at: node)
+        isDrawing = false
+    }
+    
+    func restartDraw(at node: SKSpriteNode) {
         lastDrawNode = node
-//      let nodeCenterPoint = CGPoint(x: node.frame.midX, y: node.frame.midY)
+        let nodeCenterPoint = CGPoint(x: node.frame.midX, y: node.frame.midY)
+        drawLine(nodeCenterPoint, scene: node.scene!)
+        myLine = nil
+        newPoint = node.position
+        lastPoint = node.position
     }
     
     func drawLine(_ location: CGPoint, scene: SKScene) {
-        newPoint = location
-        
-        deleteLineToReDraw()
-        
-        let pathToDraw:CGMutablePath = CGMutablePath()
-        myLine = SKShapeNode()
-        
-        pathToDraw.move(to: lastPoint)
-        pathToDraw.addLine(to: newPoint)
-        
-        myLine.path = pathToDraw
-        myLine.strokeColor = SKColor.white
-        scene.addChild(myLine)
+        if isDrawing {
+            newPoint = location
+            deleteLineToReDraw()
+            
+            let pathToDraw:CGMutablePath = CGMutablePath()
+            myLine = SKShapeNode()
+            
+            pathToDraw.move(to: lastPoint)
+            pathToDraw.addLine(to: newPoint)
+            
+            myLine.path = pathToDraw
+            myLine.strokeColor = SKColor.white
+            scene.addChild(myLine)
+            
+        }
     }
     
     func compareLastDrawNode(to node: SKSpriteNode) -> Bool {

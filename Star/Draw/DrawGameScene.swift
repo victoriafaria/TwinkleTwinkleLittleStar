@@ -19,9 +19,14 @@ class DrawGameScene: SKScene {
         
         guard let bee = self.childNode(withName: "bee") as? SKSpriteNode,
             let bee2 = self.childNode(withName: "bee2") as? SKSpriteNode,
-            let bee3 = self.childNode(withName: "bee3") as? SKSpriteNode else {fatalError("some bee was not found")}
+            let bee3 = self.childNode(withName: "bee3") as? SKSpriteNode,
+            let bee4 = self.childNode(withName: "bee4") as? SKSpriteNode,
+            let bee5 = self.childNode(withName: "bee5") as? SKSpriteNode,
+            let bee6 = self.childNode(withName: "bee6") as? SKSpriteNode,
+            let bee7 = self.childNode(withName: "bee7") as? SKSpriteNode,
+            let bee8 = self.childNode(withName: "bee8") as? SKSpriteNode else {fatalError("some bee was not found")}
         
-        bees.append(contentsOf: [bee, bee2, bee3])
+        bees.append(contentsOf: [bee, bee2, bee3, bee4, bee5, bee6, bee7, bee8])
         
         addAnimation()
     }
@@ -65,9 +70,10 @@ class DrawGameScene: SKScene {
             if let node = bees.first(where: { (element) -> Bool in
                 return element.contains(location)
             }) {
-                // comparar os nós last e o nome
+                if drawManager.compareLastDrawNode(to: node) {
+                    drawManager.restartDraw(at: node)
+                }
                 // parar o desenho
-                // iniciar o novo desenho a partir do novo no
             }
             drawManager.drawLine(location, scene: self)
         }
