@@ -15,9 +15,9 @@ class DrawManager {
     var isDrawing = false
     var lastPoint: CGPoint!
     var newPoint: CGPoint!
-    var myLine:SKShapeNode!
+    var myLine: SKShapeNode!
     
-    var lastDrawNode: SKSpriteNode?{
+    var lastDrawNode: Star?{
         willSet{
             if newValue == nil {
                 isDrawing = false
@@ -27,19 +27,25 @@ class DrawManager {
         }
     }
     
-    func startDraw(_ node: SKSpriteNode) {
+    func startDraw(_ node: Star) {
         lastDrawNode = node
         isDrawing = true
         newPoint = node.position
         lastPoint = node.position
     }
     
-    func stopDraw(at node: SKSpriteNode){
+    func stopDraw(at node: Star){
+        node.alreadyLinked = true
         restartDraw(at: node)
         isDrawing = false
     }
     
-    func restartDraw(at node: SKSpriteNode) {
+    func stopDraw() {
+        isDrawing =  false
+    }
+    
+    func restartDraw(at node: Star) {
+        lastDrawNode?.alreadyLinked = true
         lastDrawNode = node
         let nodeCenterPoint = CGPoint(x: node.frame.midX, y: node.frame.midY)
         drawLine(nodeCenterPoint, scene: node.scene!)
@@ -66,7 +72,7 @@ class DrawManager {
         }
     }
     
-    func compareLastDrawNode(to node: SKSpriteNode) -> Bool {
+    func compareLastDrawNode(to node: Star) -> Bool {
         return node.name != lastDrawNode?.name
     }
     

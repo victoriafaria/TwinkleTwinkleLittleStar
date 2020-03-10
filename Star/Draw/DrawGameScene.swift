@@ -12,22 +12,16 @@ import CoreGraphics
 
 class DrawGameScene: SKScene {
     
-    var bees: [SKSpriteNode] = []
+    var stars: [Star] = []
     let drawManager = DrawManager()
     
     override func didMove(to view: SKView) {
         
-        guard let bee = self.childNode(withName: "bee") as? SKSpriteNode,
-            let bee2 = self.childNode(withName: "bee2") as? SKSpriteNode,
-            let bee3 = self.childNode(withName: "bee3") as? SKSpriteNode,
-            let bee4 = self.childNode(withName: "bee4") as? SKSpriteNode,
-            let bee5 = self.childNode(withName: "bee5") as? SKSpriteNode,
-            let bee6 = self.childNode(withName: "bee6") as? SKSpriteNode,
-            let bee7 = self.childNode(withName: "bee7") as? SKSpriteNode,
-            let bee8 = self.childNode(withName: "bee8") as? SKSpriteNode else {fatalError("some bee was not found")}
-        
-        bees.append(contentsOf: [bee, bee2, bee3, bee4, bee5, bee6, bee7, bee8])
-        
+        for i in 1...8 {
+            if let star = self.childNode(withName: "\(String(describing: Star.self))\(i)") as? Star {
+                stars.append(star)
+            }
+        }
         addAnimation()
     }
     
@@ -39,7 +33,7 @@ class DrawGameScene: SKScene {
         
         let beeBounce = SKAction.repeatForever(moveSequence)
         
-        bees.forEach { (bee) in
+        stars.forEach { (bee) in
             bee.run(beeBounce)
         }
         
@@ -47,33 +41,50 @@ class DrawGameScene: SKScene {
 
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("asd")
         for touch in touches {
             let location = touch.location(in:self)
-            let node = bees.first { (element) -> Bool in
+            let node = stars.first { (element) -> Bool in
                 return element.contains(location)
             }
-            
-            if let node = node {
+ 
+            if let node = node, !node.alreadyLinked {
                 drawManager.startDraw(node)
             }
-            
         }
     }
 
 
+    func countLinked() -> Int {
+        var count = 0
+        for star in stars {
+            if star.alreadyLinked {
+                count += 1
+            }
+        }
+        return count
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in (touches as! Set<UITouch>) {
             var location = touch.location(in: self)
             
-            if let node = bees.first(where: { (element) -> Bool in
+            if let node = stars.first(where: { (element) -> Bool in
                 return element.contains(location)
             }) {
-                if drawManager.compareLastDrawNode(to: node) {
+                if drawManager.compareLastDrawNode(to: node), !node.alreadyLinked  {
                     drawManager.restartDraw(at: node)
+                    // colocar musica conectando estrelas
+                    // mudar asset da estrela
                 }
-                // parar o desenho
+                
+                if countLinked() == stars.count-1 {
+                    node.alreadyLinked = true
+                    drawManager.stopDraw()
+                    // fim de jogo
+                    // musica minhas crianças
+                    // aparecer botão
+                }
             }
             drawManager.drawLine(location, scene: self)
         }
