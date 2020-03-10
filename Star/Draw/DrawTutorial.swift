@@ -15,6 +15,9 @@ class DrawTutorial: SKScene {
     var star1: Star?
     var star2: Star?
     
+    var tutorialDone = false
+    var buttonNext: SKSpriteNode?
+    
     let drawManager = DrawManager()
     
     override func didMove(to view: SKView) {
@@ -22,6 +25,8 @@ class DrawTutorial: SKScene {
         starTutorial = self.childNode(withName: "starTutorial") as? Star
         star1 = self.childNode(withName: "star1") as? Star
         star2 = self.childNode(withName: "star2") as? Star
+        
+        buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
         
     }
     
@@ -43,6 +48,7 @@ class DrawTutorial: SKScene {
             
             if let node = nodeTouched(location), drawManager.compareLastDrawNode(to: node) {
                 drawManager.stopDraw(at: node)
+                tutorialDone = true
                 //aparecer botao
                 //colocar minhas crianças (música)
             }
@@ -53,7 +59,26 @@ class DrawTutorial: SKScene {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         drawManager.stopDraw()
+        
+        // mudança de scene
+        for touch in touches {
+                   let location = touch.location(in: self)
+                   if tutorialDone {
+                       if let buttonNext = buttonNext, buttonNext.contains(location) {
+                        //mudança de scene
+                           let changeScene = SKAction.run {
+                               if let scene = DrawGameScene (fileNamed: "DrawGameScene"){
+                                   scene.scaleMode = .aspectFill
+                                   self.view?.ignoresSiblingOrder = false
+                                   self.view?.presentScene(scene)
+                               }
+                           }
+                           buttonNext.run(changeScene)
+                       }
+                   }
+               }
     }
+    
     
     func nodeTouched(_ location: CGPoint) -> Star? {
         
@@ -66,7 +91,6 @@ class DrawTutorial: SKScene {
         star2.contains(location) {
             node = star2
         }
-        
         return node
     }
     

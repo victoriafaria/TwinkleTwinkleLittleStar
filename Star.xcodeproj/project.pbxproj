@@ -23,6 +23,8 @@
 		E2F5351C2417AE5F00ED9149 /* DrawTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F5351B2417AE5F00ED9149 /* DrawTutorial.swift */; };
 		E2F5351E2417AEA900ED9149 /* DrawTutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2F5351D2417AEA900ED9149 /* DrawTutorial.sks */; };
 		E2F535202417B1B100ED9149 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F5351F2417B1B100ED9149 /* Star.swift */; };
+		E2F535222417CE6F00ED9149 /* PinchTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F535212417CE6F00ED9149 /* PinchTutorial.swift */; };
+		E2F535242417CE9A00ED9149 /* PinchTutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2F535232417CE9A00ED9149 /* PinchTutorial.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		E2F5351B2417AE5F00ED9149 /* DrawTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawTutorial.swift; sourceTree = "<group>"; };
 		E2F5351D2417AEA900ED9149 /* DrawTutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DrawTutorial.sks; sourceTree = "<group>"; };
 		E2F5351F2417B1B100ED9149 /* Star.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		E2F535212417CE6F00ED9149 /* PinchTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchTutorial.swift; sourceTree = "<group>"; };
+		E2F535232417CE9A00ED9149 /* PinchTutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PinchTutorial.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 			children = (
 				E28941FA241541A500DAA387 /* PinchGameScene.sks */,
 				E28941FD241542E600DAA387 /* PinchGameScene.swift */,
+				E2F535212417CE6F00ED9149 /* PinchTutorial.swift */,
+				E2F535232417CE9A00ED9149 /* PinchTutorial.sks */,
 			);
 			path = Pinch;
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 				E2F5351E2417AEA900ED9149 /* DrawTutorial.sks in Resources */,
 				E24E12202412698000B3C8D3 /* Main.storyboard in Resources */,
 				E28941FB241541A500DAA387 /* PinchGameScene.sks in Resources */,
+				E2F535242417CE9A00ED9149 /* PinchTutorial.sks in Resources */,
 				E24E12172412698000B3C8D3 /* DrawGameScene.sks in Resources */,
 				E24E12222412698500B3C8D3 /* Assets.xcassets in Resources */,
 				E24E12252412698500B3C8D3 /* LaunchScreen.storyboard in Resources */,
@@ -202,6 +209,7 @@
 				E2F535182417AD0B00ED9149 /* Intro.swift in Sources */,
 				E2F5351C2417AE5F00ED9149 /* DrawTutorial.swift in Sources */,
 				E24E121D2412698000B3C8D3 /* GameViewController.swift in Sources */,
+				E2F535222417CE6F00ED9149 /* PinchTutorial.swift in Sources */,
 				E24E12152412698000B3C8D3 /* AppDelegate.swift in Sources */,
 				E28941FE241542E600DAA387 /* PinchGameScene.swift in Sources */,
 				E2F535202417B1B100ED9149 /* Star.swift in Sources */,

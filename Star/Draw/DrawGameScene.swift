@@ -14,6 +14,7 @@ class DrawGameScene: SKScene {
     
     var stars: [Star] = []
     let drawManager = DrawManager()
+    var buttonNext: SKSpriteNode?
     
     override func didMove(to view: SKView) {
         
@@ -22,6 +23,10 @@ class DrawGameScene: SKScene {
                 stars.append(star)
             }
         }
+        
+        buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
+        buttonNext?.isHidden = true
+        
         addAnimation()
     }
     
@@ -84,6 +89,7 @@ class DrawGameScene: SKScene {
                     // fim de jogo
                     // musica minhas crianças
                     // aparecer botão
+                    buttonNext?.isHidden = false
                 }
             }
             drawManager.drawLine(location, scene: self)
@@ -93,5 +99,23 @@ class DrawGameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
+                let changeScene = SKAction.run {
+                    if let scene = PinchTutorial (fileNamed: "PinchTutorial"){
+                        scene.scaleMode = .aspectFill
+                        self.view?.ignoresSiblingOrder = false
+                        self.view?.presentScene(scene)
+                    }
+                }
+                buttonNext.run(changeScene)
+            }
+        }
+    }
+    
 }
 

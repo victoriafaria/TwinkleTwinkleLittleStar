@@ -17,13 +17,12 @@ class PinchGameScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        guard let cloud1 = self.childNode(withName: "cloud1") as? SKSpriteNode,
-            let cloud2 = self.childNode(withName: "cloud2") as? SKSpriteNode,
-            let cloud3 = self.childNode(withName: "cloud3") as? SKSpriteNode else {fatalError("some bee was not found")}
-        
-        clouds.append(contentsOf: [cloud1, cloud2, cloud3])
-        
-        
+        for i in 1...8 {
+            if let cloud = self.childNode(withName: "cloud\(i)") as? SKSpriteNode {
+                clouds.append(cloud)
+            }
+        }
+
         // função de pinch
         pinchRecognizer.addTarget(self, action: #selector(PinchGameScene.pinch))
         self.view!.addGestureRecognizer(pinchRecognizer)
@@ -38,7 +37,6 @@ class PinchGameScene: SKScene {
         let point = convertPoint(fromView: location)
         
         let node = clouds.first { (element) -> Bool in
-            print(element.position)
             return element.contains(point)
         }
         node?.removeFromParent()

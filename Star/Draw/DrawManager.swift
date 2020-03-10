@@ -13,8 +13,8 @@ import SpriteKit
 class DrawManager {
     
     var isDrawing = false
-    var lastPoint: CGPoint!
-    var newPoint: CGPoint!
+    var lastPoint: CGPoint?
+    var newPoint: CGPoint?
     var myLine: SKShapeNode!
     
     var lastDrawNode: Star?{
@@ -61,12 +61,16 @@ class DrawManager {
             
             let pathToDraw:CGMutablePath = CGMutablePath()
             myLine = SKShapeNode()
+            myLine.glowWidth = 3
+//            myLine.lineWidth = 5
+            myLine.strokeColor = SKColor.white
             
-            pathToDraw.move(to: lastPoint)
-            pathToDraw.addLine(to: newPoint)
+            if let lastPoint = lastPoint, let newPoint = newPoint{
+                pathToDraw.move(to: lastPoint)
+                pathToDraw.addLine(to: newPoint)
+            }
             
             myLine.path = pathToDraw
-            myLine.strokeColor = SKColor.white
             scene.addChild(myLine)
             
         }
