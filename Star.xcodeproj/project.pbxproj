@@ -16,6 +16,10 @@
 		E24E12222412698500B3C8D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24E12212412698500B3C8D3 /* Assets.xcassets */; };
 		E24E12252412698500B3C8D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24E12232412698500B3C8D3 /* LaunchScreen.storyboard */; };
 		E24E122D24128F7A00B3C8D3 /* DrawManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E122C24128F7A00B3C8D3 /* DrawManager.swift */; };
+		E25E816224190D8500559FAD /* TapGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25E816124190D8500559FAD /* TapGameScene.swift */; };
+		E25E816424190D9500559FAD /* TapTutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25E816324190D9500559FAD /* TapTutorial.swift */; };
+		E25E816624190DB300559FAD /* TapGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25E816524190DB300559FAD /* TapGameScene.sks */; };
+		E25E816824191DD600559FAD /* TapTutorial.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25E816724191DD600559FAD /* TapTutorial.sks */; };
 		E28941FB241541A500DAA387 /* PinchGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E28941FA241541A500DAA387 /* PinchGameScene.sks */; };
 		E28941FE241542E600DAA387 /* PinchGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28941FD241542E600DAA387 /* PinchGameScene.swift */; };
 		E2F535182417AD0B00ED9149 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F535172417AD0B00ED9149 /* Intro.swift */; };
@@ -39,6 +43,10 @@
 		E24E12242412698500B3C8D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E24E12262412698500B3C8D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24E122C24128F7A00B3C8D3 /* DrawManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawManager.swift; sourceTree = "<group>"; };
+		E25E816124190D8500559FAD /* TapGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGameScene.swift; sourceTree = "<group>"; };
+		E25E816324190D9500559FAD /* TapTutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTutorial.swift; sourceTree = "<group>"; };
+		E25E816524190DB300559FAD /* TapGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TapGameScene.sks; sourceTree = "<group>"; };
+		E25E816724191DD600559FAD /* TapTutorial.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TapTutorial.sks; sourceTree = "<group>"; };
 		E28941FA241541A500DAA387 /* PinchGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PinchGameScene.sks; sourceTree = "<group>"; };
 		E28941FD241542E600DAA387 /* PinchGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGameScene.swift; sourceTree = "<group>"; };
 		E2F535172417AD0B00ED9149 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
@@ -94,6 +102,7 @@
 				E230794C2417378400189537 /* Intro */,
 				E28941FC2415426600DAA387 /* Draw */,
 				E28941F92415411300DAA387 /* Pinch */,
+				E25E816024190BF300559FAD /* Tap */,
 				E24E12212412698500B3C8D3 /* Assets.xcassets */,
 				E24E12182412698000B3C8D3 /* Actions.sks */,
 				E24E121E2412698000B3C8D3 /* Main.storyboard */,
@@ -101,6 +110,17 @@
 				E24E12262412698500B3C8D3 /* Info.plist */,
 			);
 			path = Star;
+			sourceTree = "<group>";
+		};
+		E25E816024190BF300559FAD /* Tap */ = {
+			isa = PBXGroup;
+			children = (
+				E25E816124190D8500559FAD /* TapGameScene.swift */,
+				E25E816524190DB300559FAD /* TapGameScene.sks */,
+				E25E816324190D9500559FAD /* TapTutorial.swift */,
+				E25E816724191DD600559FAD /* TapTutorial.sks */,
+			);
+			path = Tap;
 			sourceTree = "<group>";
 		};
 		E28941F92415411300DAA387 /* Pinch */ = {
@@ -187,6 +207,7 @@
 			files = (
 				E2F5351A2417ADA600ED9149 /* Intro.sks in Resources */,
 				E2F5351E2417AEA900ED9149 /* DrawTutorial.sks in Resources */,
+				E25E816624190DB300559FAD /* TapGameScene.sks in Resources */,
 				E24E12202412698000B3C8D3 /* Main.storyboard in Resources */,
 				E28941FB241541A500DAA387 /* PinchGameScene.sks in Resources */,
 				E2F535242417CE9A00ED9149 /* PinchTutorial.sks in Resources */,
@@ -194,6 +215,7 @@
 				E24E12222412698500B3C8D3 /* Assets.xcassets in Resources */,
 				E24E12252412698500B3C8D3 /* LaunchScreen.storyboard in Resources */,
 				E24E12192412698000B3C8D3 /* Actions.sks in Resources */,
+				E25E816824191DD600559FAD /* TapTutorial.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,10 +228,12 @@
 			files = (
 				E24E121B2412698000B3C8D3 /* DrawGameScene.swift in Sources */,
 				E24E122D24128F7A00B3C8D3 /* DrawManager.swift in Sources */,
+				E25E816424190D9500559FAD /* TapTutorial.swift in Sources */,
 				E2F535182417AD0B00ED9149 /* Intro.swift in Sources */,
 				E2F5351C2417AE5F00ED9149 /* DrawTutorial.swift in Sources */,
 				E24E121D2412698000B3C8D3 /* GameViewController.swift in Sources */,
 				E2F535222417CE6F00ED9149 /* PinchTutorial.swift in Sources */,
+				E25E816224190D8500559FAD /* TapGameScene.swift in Sources */,
 				E24E12152412698000B3C8D3 /* AppDelegate.swift in Sources */,
 				E28941FE241542E600DAA387 /* PinchGameScene.swift in Sources */,
 				E2F535202417B1B100ED9149 /* Star.swift in Sources */,
