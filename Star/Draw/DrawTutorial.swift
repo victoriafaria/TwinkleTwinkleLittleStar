@@ -14,6 +14,7 @@ class DrawTutorial: SKScene {
     var starTutorial: Star?
     var star1: Star?
     var star2: Star?
+    var starCopy: Star!
     
     var tutorialDone = false
     var buttonNext: SKSpriteNode?
@@ -28,6 +29,7 @@ class DrawTutorial: SKScene {
         
         buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
         
+        tutorialAnimation()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,7 +70,7 @@ class DrawTutorial: SKScene {
                         //mudança de scene
                            let changeScene = SKAction.run {
                                if let scene = DrawGameScene (fileNamed: "DrawGameScene"){
-                                   scene.scaleMode = .aspectFill
+                                   scene.scaleMode = .aspectFit
                                    self.view?.ignoresSiblingOrder = false
                                    self.view?.presentScene(scene)
                                }
@@ -79,6 +81,17 @@ class DrawTutorial: SKScene {
                }
     }
     
+    func tutorialAnimation() {
+        guard let star1 = star1, let star2 = star2, let starCopy = star1.copy() as? Star else { return }
+        
+        let move = SKAction.move(to: star2.position, duration: 2)
+        let moveBack = SKAction.move(to: star1.position, duration: 0)
+        let sequence = SKAction.sequence([move,moveBack])
+        self.addChild(starCopy)
+        
+        starCopy.run(SKAction.repeatForever(sequence))
+        
+    }
     
     func nodeTouched(_ location: CGPoint) -> Star? {
         

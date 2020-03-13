@@ -16,6 +16,7 @@ class DrawManager {
     var lastPoint: CGPoint?
     var newPoint: CGPoint?
     var myLine: SKShapeNode!
+    var initialNode: Star?
     
     var lastDrawNode: Star?{
         willSet{
@@ -29,6 +30,7 @@ class DrawManager {
     
     func startDraw(_ node: Star) {
         lastDrawNode = node
+        initialNode = node
         isDrawing = true
         newPoint = node.position
         lastPoint = node.position
@@ -41,7 +43,11 @@ class DrawManager {
     }
     
     func stopDraw() {
-        isDrawing =  false
+        initialNode?.alreadyLinked = true
+        if let initialNode = self.initialNode {
+            restartDraw(at: initialNode)
+        }
+        isDrawing = false
     }
     
     func restartDraw(at node: Star) {

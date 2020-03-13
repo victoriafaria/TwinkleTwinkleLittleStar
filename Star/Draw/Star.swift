@@ -13,4 +13,8 @@ class Star: SKSpriteNode {
     
     var alreadyLinked = false
     
+    static func == (a: Star, b:  Star) -> Bool {
+        return a.name == b.name 
+    }
 }
+

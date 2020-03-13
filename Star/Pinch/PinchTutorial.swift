@@ -47,7 +47,7 @@ class PinchTutorial: SKScene {
                 if let buttonNext = buttonNext, buttonNext.contains(location) {
                     let changeScene = SKAction.run {
                         if let scene = PinchGameScene (fileNamed: "PinchGameScene"){
-                            scene.scaleMode = .aspectFill
+                            scene.scaleMode = .aspectFit
                             self.view?.ignoresSiblingOrder = false
                             self.view?.presentScene(scene)
                         }

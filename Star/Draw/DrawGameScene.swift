@@ -16,9 +16,12 @@ class DrawGameScene: SKScene {
     let drawManager = DrawManager()
     var buttonNext: SKSpriteNode?
     
+    var background: SKSpriteNode?
+    
+    
     override func didMove(to view: SKView) {
         
-        for i in 1...8 {
+        for i in 1...18 {
             if let star = self.childNode(withName: "\(String(describing: Star.self))\(i)") as? Star {
                 stars.append(star)
             }
@@ -27,38 +30,40 @@ class DrawGameScene: SKScene {
         buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
         buttonNext?.isHidden = true
         
-        addAnimation()
+        background = self.childNode(withName: "background") as? SKSpriteNode
+        
+        nextStar()
+        
     }
     
-    func addAnimation()  {
-        let beeLeft = SKAction.rotate(byAngle: -0.5, duration: 0.1)
-        let beeRight = SKAction.rotate(byAngle: 0.5, duration: 0.1)
+    func addAnimation(star: Star)  {
+        print(star.name)
+        let left = SKAction.rotate(byAngle: -0.5, duration: 0.1)
+        let right = SKAction.rotate(byAngle: 0.5, duration: 0.1)
         
-        let moveSequence = SKAction.sequence([beeLeft,beeRight])
+        let scale = SKAction.scale(by: 2, duration: 0.1)
         
-        let beeBounce = SKAction.repeatForever(moveSequence)
+        let moveSequence = SKAction.sequence([left,right])
         
-        stars.forEach { (bee) in
-            bee.run(beeBounce)
-        }
+        let bounce = SKAction.repeatForever(moveSequence)
+        let group = SKAction.group([bounce, scale])
+        
+        star.run(group)
         
     }
-
-
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in:self)
-            let node = stars.first { (element) -> Bool in
-                return element.contains(location)
-            }
- 
-            if let node = node, !node.alreadyLinked {
+            let node = nextStar()
+            if node.contains(location), !node.alreadyLinked {
                 drawManager.startDraw(node)
             }
         }
     }
-
-
+    
+    
     func countLinked() -> Int {
         var count = 0
         for star in stars {
@@ -74,26 +79,52 @@ class DrawGameScene: SKScene {
         for touch in (touches as! Set<UITouch>) {
             var location = touch.location(in: self)
             
-            if let node = stars.first(where: { (element) -> Bool in
-                return element.contains(location)
-            }) {
-                if drawManager.compareLastDrawNode(to: node), !node.alreadyLinked  {
-                    drawManager.restartDraw(at: node)
+            let next = nextStar()
+            if next.contains(location) {
+                
+                if drawManager.compareLastDrawNode(to: next), !next.alreadyLinked  {
+                    drawManager.restartDraw(at: next)
                     // colocar musica conectando estrelas
                     // mudar asset da estrela
                 }
-                
-                if countLinked() == stars.count-1 {
-                    node.alreadyLinked = true
-                    drawManager.stopDraw()
-                    // fim de jogo
-                    // musica minhas crianças
-                    // aparecer botão
-                    buttonNext?.isHidden = false
-                }
+                endDrawGame(next)
             }
             drawManager.drawLine(location, scene: self)
         }
+    }
+    
+    
+    var nextStarIndex: Int = 0
+    
+    func nextStar() -> Star {
+        
+        var nextStar: Star = stars.first!
+        if let lastNode = drawManager.lastDrawNode,
+            let index = stars.firstIndex(of: lastNode),
+            stars.indices.contains(index+1){
+            nextStar = stars[index+1]
+        }
+        addAnimation(star: nextStar)
+        return nextStar
+    }
+    
+    
+    func endDrawGame(_ nextStar: Star) {
+        if countLinked() == stars.count-1 {
+            nextStar.alreadyLinked = true
+            // drawManager.stopDraw()
+            
+            drawManager.stopDraw()
+            showMoon()
+            // musica minhas crianças
+            // aparecer botão
+            buttonNext?.isHidden = false
+        }
+    }
+    
+    func showMoon() {
+        let moon = self.childNode(withName: "moon") as? SKSpriteNode
+        moon?.alpha = 1
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -107,7 +138,7 @@ class DrawGameScene: SKScene {
             if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
                 let changeScene = SKAction.run {
                     if let scene = PinchTutorial (fileNamed: "PinchTutorial"){
-                        scene.scaleMode = .aspectFill
+                        scene.scaleMode = .aspectFit
                         self.view?.ignoresSiblingOrder = false
                         self.view?.presentScene(scene)
                     }
