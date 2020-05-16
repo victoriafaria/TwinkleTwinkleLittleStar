@@ -104,9 +104,9 @@
 				E28941F92415411300DAA387 /* Pinch */,
 				E25E816024190BF300559FAD /* Tap */,
 				E24E12212412698500B3C8D3 /* Assets.xcassets */,
-				E24E12182412698000B3C8D3 /* Actions.sks */,
 				E24E121E2412698000B3C8D3 /* Main.storyboard */,
 				E24E12232412698500B3C8D3 /* LaunchScreen.storyboard */,
+				E24E12182412698000B3C8D3 /* Actions.sks */,
 				E24E12262412698500B3C8D3 /* Info.plist */,
 			);
 			path = Star;

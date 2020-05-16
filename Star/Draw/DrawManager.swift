@@ -9,7 +9,6 @@
 import Foundation
 import SpriteKit
 
-
 class DrawManager {
     
     var isDrawing = false

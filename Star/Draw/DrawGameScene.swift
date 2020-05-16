@@ -18,6 +18,8 @@ class DrawGameScene: SKScene {
     
     var background: SKSpriteNode?
     
+    var startStar: Star!
+    var endStar: Star!
     
     override func didMove(to view: SKView) {
         
@@ -32,7 +34,13 @@ class DrawGameScene: SKScene {
         
         background = self.childNode(withName: "background") as? SKSpriteNode
         
-        nextStar()
+        //        nextStar()
+        
+        self.startStar = stars[drawIndex]
+        
+        drawManager.lastDrawNode = self.startStar
+        
+        addAnimation(star: self.startStar)
         
     }
     
@@ -52,17 +60,28 @@ class DrawGameScene: SKScene {
         
     }
     
+    var drawIndex: Int = 0
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in:self)
-            let node = nextStar()
-            if node.contains(location), !node.alreadyLinked {
-                drawManager.startDraw(node)
+            
+            
+            for node in self.nodes(at: location) {
+                if node == startStar && !startStar.alreadyLinked {
+                    self.startStar.alreadyLinked = true
+                    drawManager.startDraw(self.startStar)
+                    if drawIndex < stars.count {
+                        drawIndex += 1
+                    }
+                    self.endStar = stars[drawIndex] // FIXME PLEASE Out of bounds
+                    self.startStar.removeAllActions()
+                    addAnimation(star: self.endStar)
+                    break
+                }
             }
         }
     }
-    
     
     func countLinked() -> Int {
         var count = 0
@@ -79,42 +98,38 @@ class DrawGameScene: SKScene {
         for touch in (touches as! Set<UITouch>) {
             var location = touch.location(in: self)
             
-            let next = nextStar()
-            if next.contains(location) {
-                
-                if drawManager.compareLastDrawNode(to: next), !next.alreadyLinked  {
-                    drawManager.restartDraw(at: next)
-                    // colocar musica conectando estrelas
-                    // mudar asset da estrela
-                }
-                endDrawGame(next)
-            }
             drawManager.drawLine(location, scene: self)
+            
+            if self.endStar.contains(location) {
+                self.endStar.alreadyLinked = true
+                self.endStar.removeAllActions()
+                drawManager.restartDraw(at: self.endStar)
+                self.startStar = endStar
+                
+                if drawIndex < stars.count {
+                    drawIndex += 1
+                }
+                
+                // last start connected ?
+                if drawIndex != stars.count {
+                    self.endStar = stars[drawIndex] //FIXME PLEASE Out of bounds
+                    addAnimation(star: self.endStar)
+                } else {
+                    // last one
+                    endDrawGame(self.endStar)
+                }
+                
+                break
+                
+            }
         }
     }
-    
-    
-    var nextStarIndex: Int = 0
-    
-    func nextStar() -> Star {
-        
-        var nextStar: Star = stars.first!
-        if let lastNode = drawManager.lastDrawNode,
-            let index = stars.firstIndex(of: lastNode),
-            stars.indices.contains(index+1){
-            nextStar = stars[index+1]
-        }
-        addAnimation(star: nextStar)
-        return nextStar
-    }
-    
     
     func endDrawGame(_ nextStar: Star) {
-        if countLinked() == stars.count-1 {
+        if countLinked() == stars.count {
             nextStar.alreadyLinked = true
-            // drawManager.stopDraw()
-            
             drawManager.stopDraw()
+            
             showMoon()
             // musica minhas crianças
             // aparecer botão
