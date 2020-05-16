@@ -29,7 +29,6 @@ class Intro: SKScene {
         jupyter?.self.childNode(withName: "jupyter") as? SKSpriteNode
         bigPlanet.self?.childNode(withName: "bigPlanet") as? SKSpriteNode
         satellite.self?.childNode(withName: "bigPlanet") as? SKSpriteNode
-        
     }
     
 }
