@@ -61,7 +61,20 @@ class Intro: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if let buttonPlay = buttonPlay, !buttonPlay.isHidden, buttonPlay.contains(location) {
+                let changeScene = SKAction.run {
+                    if let scene = DrawTutorial (fileNamed: "DrawTutorial"){
+                        scene.scaleMode = .aspectFit
+                        self.view?.ignoresSiblingOrder = false
+                        self.view?.presentScene(scene)
+                    }
+                }
+                buttonPlay.run(changeScene)
+            }
+        }
     }
     
     
