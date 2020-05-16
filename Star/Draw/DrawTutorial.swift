@@ -28,6 +28,7 @@ class DrawTutorial: SKScene {
         star2 = self.childNode(withName: "star2") as? Star
         
         buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
+        buttonNext?.isHidden = true
         
         tutorialAnimation()
     }
@@ -51,7 +52,7 @@ class DrawTutorial: SKScene {
             if let node = nodeTouched(location), drawManager.compareLastDrawNode(to: node) {
                 drawManager.stopDraw(at: node)
                 tutorialDone = true
-                //aparecer botao
+                buttonNext?.isHidden = false
                 //colocar minhas crianças (música)
             }
             drawManager.drawLine(location, scene: self)
