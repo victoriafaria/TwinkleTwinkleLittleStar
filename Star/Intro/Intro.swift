@@ -23,12 +23,32 @@ class Intro: SKScene {
     override func didMove(to view: SKView) {
         
         buttonPlay?.isHidden = true
-        background?.self.childNode(withName: "background") as? SKSpriteNode
-        logo.self?.childNode(withName: "logo") as? SKSpriteNode
-        rocket.self?.childNode(withName: "rocket") as? SKSpriteNode
-        jupyter?.self.childNode(withName: "jupyter") as? SKSpriteNode
-        bigPlanet.self?.childNode(withName: "bigPlanet") as? SKSpriteNode
-        satellite.self?.childNode(withName: "bigPlanet") as? SKSpriteNode
+        background = self.childNode(withName: "background") as? SKSpriteNode
+        
+        logo = self.childNode(withName: "logo") as? SKSpriteNode
+        
+        rocket = self.childNode(withName: "rocket") as? SKSpriteNode
+        let moveRocket = SKAction.move(to: CGPoint(x: 0, y: 128), duration: 3)
+        self.rocket?.run(moveRocket)
+        
+        jupyter = self.childNode(withName: "jupyter") as? SKSpriteNode
+        let rotateJupyterRight = SKAction.rotate(byAngle: -4.0, duration: 2)
+        let rotateJupyterLeft = SKAction.rotate(byAngle: 4.0, duration: 2)
+        let grupJupyter = SKAction.group([rotateJupyterRight, rotateJupyterLeft])
+        let repeatForeverJupyter = SKAction.repeatForever(grupJupyter)
+        self.jupyter?.run(repeatForeverJupyter)
+        
+        bigPlanet = self.childNode(withName: "bigPlanet") as? SKSpriteNode
+        let moveBigPlanet = SKAction.move(to: CGPoint(x: 0, y: 0), duration: 3)
+        self.bigPlanet?.run(moveBigPlanet)
+        
+        satellite = self.childNode(withName: "satellite") as? SKSpriteNode
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
+    
     
 }
