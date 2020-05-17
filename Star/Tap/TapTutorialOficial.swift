@@ -12,15 +12,15 @@ import SpriteKit
 class TapTutorialOficial: SKScene {
     
     var starSleepTutorial: SKSpriteNode?
-    var buttonTutorialTap: SKSpriteNode?
+    var buttonNext: SKSpriteNode?
     var tutorialDone = false
     
     let tapRecognizer = UITapGestureRecognizer()
     
     override func didMove(to view: SKView) {
         
-        buttonTutorialTap = self.childNode(withName: "buttonTutorialTap") as? SKSpriteNode
-        buttonTutorialTap?.isHidden = true
+        buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
+        buttonNext?.isHidden = true
         
         starSleepTutorial = self.childNode(withName: "starSleepTutorial") as? SKSpriteNode
         
@@ -42,12 +42,13 @@ class TapTutorialOficial: SKScene {
             let textureLightUp = SKTexture(imageNamed: "starLightUp")
             starSleepTutorial?.texture = textureLightUp
             tutorialDone = true
-            buttonTutorialTap?.isHidden = false
+            buttonNext?.isHidden = false
             print("trocou")
             //adicionar musica do tap
         }
     }
     
+   
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        for touch in touches {
 //            let location = touch.location(in:self)
@@ -71,15 +72,15 @@ class TapTutorialOficial: SKScene {
         for touch in touches {
             let location = touch.location(in: self)
             
-            if let buttonTutorialTap = buttonTutorialTap, !buttonTutorialTap.isHidden, buttonTutorialTap.contains(location) {
+            if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
                 let changeScene = SKAction.run {
-                    if let scene = TapGameScene (fileNamed: "TapGameScene"){
+                    if let scene = PinchTutorial (fileNamed: "PinchTutorial"){
                         scene.scaleMode = .aspectFit
                         self.view?.ignoresSiblingOrder = false
                         self.view?.presentScene(scene)
                     }
                 }
-                buttonTutorialTap.run(changeScene)
+                buttonNext.run(changeScene)
             }
         }
     }
