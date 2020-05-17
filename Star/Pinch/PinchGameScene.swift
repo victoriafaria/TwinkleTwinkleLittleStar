@@ -35,8 +35,6 @@ class PinchGameScene: SKScene {
     
     // função pinch
     @objc func pinch(_ gesture:UIPinchGestureRecognizer) {
-//        if gesture.state == .ended {
-//        }
         let location = gesture.location(in: self.view!)
         let point = convertPoint(fromView: location)
         
@@ -60,7 +58,7 @@ class PinchGameScene: SKScene {
             
             if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
                 let changeScene = SKAction.run {
-                    if let scene = TapTutorial (fileNamed: "TapTutorial"){
+                    if let scene = TapTutorialOficial (fileNamed: "TapTutorialOficial"){
                         scene.scaleMode = .aspectFit
                         self.view?.ignoresSiblingOrder = false
                         self.view?.presentScene(scene)
