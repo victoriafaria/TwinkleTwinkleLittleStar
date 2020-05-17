@@ -106,6 +106,7 @@ class DrawTutorial: SKScene {
             node = star2
         }
         return node
+        // parar animacao da estrela
     }
     
 }

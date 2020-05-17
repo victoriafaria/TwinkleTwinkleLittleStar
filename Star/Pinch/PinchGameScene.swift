@@ -50,10 +50,24 @@ class PinchGameScene: SKScene {
         
         if clouds.isEmpty {
             print("cabo as nuven mano")
-            buttonNext?.isHidden = true
+            buttonNext?.isHidden = false
         }
     }
     
-    
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self)
+            
+            if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
+                let changeScene = SKAction.run {
+                    if let scene = TapTutorial (fileNamed: "TapTutorial"){
+                        scene.scaleMode = .aspectFit
+                        self.view?.ignoresSiblingOrder = false
+                        self.view?.presentScene(scene)
+                    }
+                }
+                buttonNext.run(changeScene)
+            }
+        }
+    }
 }

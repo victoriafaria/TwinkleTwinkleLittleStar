@@ -19,26 +19,32 @@ class TapTutorial: SKScene {
         
         starSleepTutorial = self.childNode(withName: "starSleepTutorial") as? SKSpriteNode
         buttonNext?.isHidden = true
+        
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in:self)
-            let touchedNode = self.atPoint(location)
-            starSleepTutorial = touchedNode as? SKSpriteNode
             
-            if starSleepTutorial?.name == "starSleepTutorial" {
-                let textureLightUp = SKTexture(imageNamed: "starLightUp")
-                starSleepTutorial?.texture = textureLightUp
-                tutorialDone = true
-                //adicionar musica do tap
-            }
+            let touchedNode = self.atPoint(location)
+                    starSleepTutorial = touchedNode as? SKSpriteNode
+                    
+                    if starSleepTutorial?.name == "starSleepTutorial" {
+                        let textureLightUp = SKTexture(imageNamed: "starLightUp")
+                        starSleepTutorial?.texture = textureLightUp
+                        tutorialDone = true
+                        buttonNext?.isHidden = false
+                        //adicionar musica do tap
+                    }
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
+            
+            // trocar de tela
             if tutorialDone {
                 if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
                     let changeScene = SKAction.run {

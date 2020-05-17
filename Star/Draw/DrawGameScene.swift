@@ -97,7 +97,6 @@ class DrawGameScene: SKScene {
         
         for touch in (touches as! Set<UITouch>) {
             var location = touch.location(in: self)
-            
             drawManager.drawLine(location, scene: self)
             
             if self.endStar.contains(location) {
@@ -118,9 +117,7 @@ class DrawGameScene: SKScene {
                     // last one
                     endDrawGame(self.endStar)
                 }
-                
                 break
-                
             }
         }
     }
