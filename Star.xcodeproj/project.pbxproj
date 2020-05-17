@@ -18,6 +18,8 @@
 		E24E12222412698500B3C8D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24E12212412698500B3C8D3 /* Assets.xcassets */; };
 		E24E12252412698500B3C8D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24E12232412698500B3C8D3 /* LaunchScreen.storyboard */; };
 		E24E122D24128F7A00B3C8D3 /* DrawManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E122C24128F7A00B3C8D3 /* DrawManager.swift */; };
+		E25C68E22471B1B40029B043 /* EndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25C68E12471B1B40029B043 /* EndScene.swift */; };
+		E25C68E42471B1C90029B043 /* EndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25C68E32471B1C90029B043 /* EndScene.sks */; };
 		E25E816224190D8500559FAD /* TapGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25E816124190D8500559FAD /* TapGameScene.swift */; };
 		E25E816824191DD600559FAD /* TapGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E25E816724191DD600559FAD /* TapGameScene.sks */; };
 		E28941FB241541A500DAA387 /* PinchGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E28941FA241541A500DAA387 /* PinchGameScene.sks */; };
@@ -45,6 +47,8 @@
 		E24E12242412698500B3C8D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E24E12262412698500B3C8D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24E122C24128F7A00B3C8D3 /* DrawManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawManager.swift; sourceTree = "<group>"; };
+		E25C68E12471B1B40029B043 /* EndScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScene.swift; sourceTree = "<group>"; };
+		E25C68E32471B1C90029B043 /* EndScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = EndScene.sks; sourceTree = "<group>"; };
 		E25E816124190D8500559FAD /* TapGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGameScene.swift; sourceTree = "<group>"; };
 		E25E816724191DD600559FAD /* TapGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TapGameScene.sks; sourceTree = "<group>"; };
 		E28941FA241541A500DAA387 /* PinchGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PinchGameScene.sks; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				E28941FC2415426600DAA387 /* Draw */,
 				E28941F92415411300DAA387 /* Pinch */,
 				E25E816024190BF300559FAD /* Tap */,
+				E25C68E02471B1980029B043 /* End */,
 				E24E12212412698500B3C8D3 /* Assets.xcassets */,
 				E24E121E2412698000B3C8D3 /* Main.storyboard */,
 				E24E12232412698500B3C8D3 /* LaunchScreen.storyboard */,
@@ -110,6 +115,15 @@
 				E24E12262412698500B3C8D3 /* Info.plist */,
 			);
 			path = Star;
+			sourceTree = "<group>";
+		};
+		E25C68E02471B1980029B043 /* End */ = {
+			isa = PBXGroup;
+			children = (
+				E25C68E12471B1B40029B043 /* EndScene.swift */,
+				E25C68E32471B1C90029B043 /* EndScene.sks */,
+			);
+			path = End;
 			sourceTree = "<group>";
 		};
 		E25E816024190BF300559FAD /* Tap */ = {
@@ -205,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25C68E42471B1C90029B043 /* EndScene.sks in Resources */,
 				E2F5351A2417ADA600ED9149 /* Intro.sks in Resources */,
 				E2F5351E2417AEA900ED9149 /* DrawTutorial.sks in Resources */,
 				E24E12202412698000B3C8D3 /* Main.storyboard in Resources */,
@@ -232,6 +247,7 @@
 				E2F5351C2417AE5F00ED9149 /* DrawTutorial.swift in Sources */,
 				E24E121D2412698000B3C8D3 /* GameViewController.swift in Sources */,
 				E2F535222417CE6F00ED9149 /* PinchTutorial.swift in Sources */,
+				E25C68E22471B1B40029B043 /* EndScene.swift in Sources */,
 				E24056722470E84000953BE9 /* TapTutorialOficial.swift in Sources */,
 				E25E816224190D8500559FAD /* TapGameScene.swift in Sources */,
 				E24E12152412698000B3C8D3 /* AppDelegate.swift in Sources */,

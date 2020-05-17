@@ -12,41 +12,66 @@ import SpriteKit
 class TapGameScene: SKScene {
     
     var stars: [SKSpriteNode] = []
-    let tapRecognizer = UITapGestureRecognizer()
+    var buttonNext: SKSpriteNode?
+    var startTapped: SKSpriteNode? = nil
     
     override func didMove(to view: SKView) {
         
+        buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
+        buttonNext?.isHidden = true
         
         for i in 1...10 {
             if let star = self.childNode(withName: "starSleep\(i)") as? SKSpriteNode {
                 stars.append(star)
             }
         }
-        
-        // função de tap
-          tapRecognizer.addTarget(self, action: #selector(TapGameScene.tap))
-          self.view!.addGestureRecognizer(tapRecognizer)
     }
     
-    // função pinch
-    @objc func tap(_ gesture:UITapGestureRecognizer) {
-        let location = gesture.location(in: self.view!)
-        let point = convertPoint(fromView: location)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+
+        guard let location = touches.first?.location(in: self) else {return}
         
-        let node = stars.first { (element) -> Bool in
-            return element.contains(point)
+        //Qual estrela foi tapped + troca de texture
+        startTapped = nil
+        stars.forEach { star in
+            if star.contains(location) {
+                startTapped = star
+            }
         }
-        node?.removeFromParent()
-        stars.removeAll { (element) -> Bool in
-            return element == node
+        if self.startTapped != nil {
+            starTapped()
         }
         
-        if stars.isEmpty {
-            print("cabo as estrela mano")
-//            buttonNext?.isHidden = false
+        //Quantas estrelas foram tapped
+        var tappedCount = 0
+        stars.forEach { star in
+            if star.name?.contains("Tapped") == true {
+                tappedCount += 1
+            }
+        }
+        if tappedCount == stars.count {
+            buttonNext?.isHidden = false
+        }
+        
+        if let buttonNext = buttonNext, !buttonNext.isHidden, buttonNext.contains(location) {
+            let changeScene = SKAction.run {
+                if let scene = EndScene(fileNamed: "EndScene"){
+                    scene.scaleMode = .aspectFit
+                    self.view?.ignoresSiblingOrder = false
+                    self.view?.presentScene(scene)
+                }
+            }
+            buttonNext.run(changeScene)
         }
     }
-  
+    
+    private func starTapped() {
+        let textureLightUp = SKTexture(imageNamed: "starLightUp")
+        startTapped?.texture = textureLightUp
+        startTapped?.name? += "Tapped"
+        print("trocou de estrela")
+        //adicionar musica do tap
+    }
     
     
 } // end class
