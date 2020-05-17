@@ -14,7 +14,7 @@ class DrawTutorial: SKScene {
     var starTutorial: Star?
     var star1: Star?
     var star2: Star?
-    var starCopy: Star!
+//    var starCopy: Star!
     
     var tutorialDone = false
     var buttonNext: SKSpriteNode?
@@ -53,6 +53,7 @@ class DrawTutorial: SKScene {
                 drawManager.stopDraw(at: node)
                 tutorialDone = true
                 buttonNext?.isHidden = false
+                stopTutorialAnimation()
                 //colocar minhas crianças (música)
             }
             drawManager.drawLine(location, scene: self)
@@ -65,32 +66,45 @@ class DrawTutorial: SKScene {
         
         // mudança de scene
         for touch in touches {
-                   let location = touch.location(in: self)
-                   if tutorialDone {
-                       if let buttonNext = buttonNext, buttonNext.contains(location) {
-                        //mudança de scene
-                           let changeScene = SKAction.run {
-                               if let scene = DrawGameScene (fileNamed: "DrawGameScene"){
-                                   scene.scaleMode = .aspectFit
-                                   self.view?.ignoresSiblingOrder = false
-                                   self.view?.presentScene(scene)
-                               }
-                           }
-                           buttonNext.run(changeScene)
-                       }
-                   }
-               }
+            let location = touch.location(in: self)
+            if tutorialDone {
+                if let buttonNext = buttonNext, buttonNext.contains(location) {
+                    //mudança de scene
+                    let changeScene = SKAction.run {
+                        if let scene = DrawGameScene (fileNamed: "DrawGameScene"){
+                            scene.scaleMode = .aspectFit
+                            self.view?.ignoresSiblingOrder = false
+                            self.view?.presentScene(scene)
+                        }
+                    }
+                    buttonNext.run(changeScene)
+                }
+            } else {
+                star1?.alreadyLinked = false
+                star2?.alreadyLinked = false
+            }
+        }
+    }
+    
+    func stopTutorialAnimation() {
+        if let starCopy = self.childNode(withName: "starCopy") {
+            starCopy.removeAllActions()
+            starCopy.removeFromParent()
+        }
+        
+        
     }
     
     func tutorialAnimation() {
         guard let star1 = star1, let star2 = star2, let starCopy = star1.copy() as? Star else { return }
         
+        starCopy.name = "starCopy"
         let move = SKAction.move(to: star2.position, duration: 2)
         let moveBack = SKAction.move(to: star1.position, duration: 0)
         let sequence = SKAction.sequence([move,moveBack])
         self.addChild(starCopy)
         
-        starCopy.run(SKAction.repeatForever(sequence))
+        starCopy.run(SKAction.repeatForever(sequence), withKey: "starRun")
         
     }
     

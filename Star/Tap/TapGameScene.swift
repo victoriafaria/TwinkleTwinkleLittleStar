@@ -66,8 +66,9 @@ class TapGameScene: SKScene {
     }
     
     private func starTapped() {
-        let textureLightUp = SKTexture(imageNamed: "starLightUp")
+        let textureLightUp = SKTexture(imageNamed: "starHappy")
         startTapped?.texture = textureLightUp
+        startTapped?.size = CGSize(width: 65, height: 60)
         startTapped?.name? += "Tapped"
         print("trocou de estrela")
         //adicionar musica do tap
