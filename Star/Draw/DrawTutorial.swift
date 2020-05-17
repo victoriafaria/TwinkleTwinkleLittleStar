@@ -77,7 +77,8 @@ class DrawTutorial: SKScene {
                             self.view?.presentScene(scene)
                         }
                     }
-                    buttonNext.run(changeScene)
+                    let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                    buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
                 }
             } else {
                 star1?.alreadyLinked = false
@@ -90,6 +91,8 @@ class DrawTutorial: SKScene {
         if let starCopy = self.childNode(withName: "starCopy") {
             starCopy.removeAllActions()
             starCopy.removeFromParent()
+            let soundAction = SKAction.playSoundFileNamed("stars.mp3", waitForCompletion: false)
+            run(soundAction)
         }
         
         

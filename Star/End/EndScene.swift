@@ -33,7 +33,8 @@ class EndScene: SKScene {
                     self.view?.presentScene(scene)
                 }
             }
-            buttonAbout?.run(changeScene)
+            let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+            buttonAbout?.run(SKAction.sequence([soundActionButton,changeScene]))
         }
         
     }

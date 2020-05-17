@@ -31,7 +31,8 @@ class TapTutorialOficial: SKScene {
         starSleepTutorial?.size = CGSize(width: 110, height: 100)
         buttonNext?.isHidden = false
         print("trocou de estrela")
-        //adicionar musica do tap
+        let soundAction = SKAction.playSoundFileNamed("tap.mp3", waitForCompletion: false)
+        run(soundAction)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -48,7 +49,8 @@ class TapTutorialOficial: SKScene {
                         self.view?.presentScene(scene)
                     }
                 }
-                buttonNext.run(changeScene)
+                let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
             }
         }
     }

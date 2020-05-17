@@ -105,6 +105,9 @@ class DrawGameScene: SKScene {
                 drawManager.restartDraw(at: self.endStar)
                 self.startStar = endStar
                 
+                let soundAction = SKAction.playSoundFileNamed("stars.mp3", waitForCompletion: false)
+                run(soundAction)
+            
                 if drawIndex < stars.count {
                     drawIndex += 1
                 }
@@ -155,7 +158,8 @@ class DrawGameScene: SKScene {
                         self.view?.presentScene(scene)
                     }
                 }
-                buttonNext.run(changeScene)
+                let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
             }
         }
     }

@@ -41,6 +41,8 @@ class PinchGameScene: SKScene {
         let node = clouds.first { (element) -> Bool in
             return element.contains(point)
         }
+        let soundAction = SKAction.playSoundFileNamed("clouds.mp3", waitForCompletion: false)
+        run(soundAction)
         node?.removeFromParent()
         clouds.removeAll { (element) -> Bool in
             return element == node
@@ -64,7 +66,8 @@ class PinchGameScene: SKScene {
                         self.view?.presentScene(scene)
                     }
                 }
-                buttonNext.run(changeScene)
+                let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
             }
         }
     }

@@ -61,7 +61,8 @@ class TapGameScene: SKScene {
                     self.view?.presentScene(scene)
                 }
             }
-            buttonNext.run(changeScene)
+            let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+            buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
         }
     }
     
@@ -71,8 +72,8 @@ class TapGameScene: SKScene {
         startTapped?.size = CGSize(width: 65, height: 60)
         startTapped?.name? += "Tapped"
         print("trocou de estrela")
-        //adicionar musica do tap
+        let soundAction = SKAction.playSoundFileNamed("tap.mp3", waitForCompletion: false)
+        run(soundAction)
     }
-    
     
 } // end class

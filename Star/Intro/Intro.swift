@@ -8,9 +8,39 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
+
+
+private let AudioManagerInstance = AudioPlayer()
+
+class AudioPlayer {
+    
+    public class func sharedInstance() -> AudioPlayer {
+        return AudioManagerInstance
+    }
+    var musicPlayer: AVAudioPlayer!
+    
+    public func playMusic(fileName: String, withExtension type: String = "mp3") {
+        if let url = Bundle.main.url(forResource: fileName, withExtension: type) {
+            musicPlayer = try? AVAudioPlayer(contentsOf: url)
+            musicPlayer.numberOfLoops = -1
+            musicPlayer.volume = 0.2
+            musicPlayer.prepareToPlay()
+            musicPlayer.play()
+        }
+    }
+    
+    public func stopMusic() {
+        if musicPlayer != nil && musicPlayer!.isPlaying {
+            musicPlayer.currentTime = 0
+            musicPlayer.stop()
+        }
+    }
+}
 
 class Intro: SKScene {
     
+    let audioPlayer = AudioPlayer.sharedInstance()
     var buttonPlay: SKSpriteNode?
     var background: SKSpriteNode?
     var logo: SKSpriteNode?
@@ -22,9 +52,12 @@ class Intro: SKScene {
     
     override func didMove(to view: SKView) {
         
-        buttonPlay?.isHidden = true
+        audioPlayer.playMusic(fileName: "bensound-smile")
+        
+        
         buttonPlay = self.childNode(withName: "buttonPlay") as? SKSpriteNode
-        let waitPlay = SKAction.wait(forDuration: 5.0)
+        buttonPlay?.alpha = 0.0
+        let waitPlay = SKAction.wait(forDuration: 1.5)
         let appearPlay = SKAction.fadeAlpha(by: 1.0, duration: 1.5)
         self.buttonPlay?.run(SKAction.sequence([waitPlay,appearPlay]))
         
@@ -60,11 +93,16 @@ class Intro: SKScene {
         self.satellite?.run(repeatForeverSatellite)
     }
     
+    
+
+    
+    
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
             
-            if let buttonPlay = buttonPlay, !buttonPlay.isHidden, buttonPlay.contains(location) {
+            if let buttonPlay = buttonPlay, buttonPlay.alpha == 1.0, buttonPlay.contains(location) {
                 let changeScene = SKAction.run {
                     if let scene = DrawTutorial (fileNamed: "DrawTutorial"){
                         scene.scaleMode = .aspectFit
@@ -72,7 +110,8 @@ class Intro: SKScene {
                         self.view?.presentScene(scene)
                     }
                 }
-                buttonPlay.run(changeScene)
+                let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                buttonPlay.run(SKAction.sequence([soundActionButton,changeScene]))
             }
         }
     }

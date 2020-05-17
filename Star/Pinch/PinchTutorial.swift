@@ -20,6 +20,7 @@ class PinchTutorial: SKScene {
     
     override func didMove(to view: SKView) {
         
+        
         cloudTutorial = self.childNode(withName: "cloudTutorial") as? SKSpriteNode
         buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
         
@@ -37,6 +38,8 @@ class PinchTutorial: SKScene {
             if let cloudTutorial = cloudTutorial, cloudTutorial.contains(point) {
                 cloudTutorial.removeFromParent()
                 tutorialDone = true
+                let soundAction = SKAction.playSoundFileNamed("clouds.mp3", waitForCompletion: false)
+                run(soundAction)
             }
         }
     
@@ -52,7 +55,8 @@ class PinchTutorial: SKScene {
                             self.view?.presentScene(scene)
                         }
                     }
-                    buttonNext.run(changeScene)
+                    let soundActionButton = SKAction.playSoundFileNamed("button.mp3", waitForCompletion: false)
+                    buttonNext.run(SKAction.sequence([soundActionButton,changeScene]))
                 }
             }
         }
