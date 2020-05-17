@@ -13,11 +13,15 @@ class PinchGameScene: SKScene {
     
     var clouds: [SKSpriteNode] = []
     let pinchRecognizer = UIPinchGestureRecognizer()
+    var buttonNext: SKSpriteNode?
   
     
     override func didMove(to view: SKView) {
         
-        for i in 1...8 {
+        buttonNext = self.childNode(withName: "buttonNext") as? SKSpriteNode
+        buttonNext?.isHidden = true
+        
+        for i in 1...10 {
             if let cloud = self.childNode(withName: "cloud\(i)") as? SKSpriteNode {
                 clouds.append(cloud)
             }
@@ -46,8 +50,8 @@ class PinchGameScene: SKScene {
         
         if clouds.isEmpty {
             print("cabo as nuven mano")
+            buttonNext?.isHidden = true
         }
-        
     }
     
     
